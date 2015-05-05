@@ -8,12 +8,12 @@ How to install
 -------
 ```sh
 git clone https://github.com/ayu-mushi/memoru
-mv memoru $YOUR_PATH
+mv memoru/memoru.py $YOUR_PATH/memoru
 ```
 
 tutorial
 --------
 ```sh
-memoru.py init
-memoru.py gen
+memoru init
+memoru gen
 ```
