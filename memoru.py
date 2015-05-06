@@ -23,14 +23,6 @@ class Memo:
         f.write(content)
         f.close()
 
-    def toJSON(self):
-        return json.dumps({'index': self.index, 'ext': self.extension, 'dir': self.directory})
-
-    @staticmethod
-    def fromJSON(s):
-        d = json.loads(s)
-        return Memo(ix=d['index'], ext=d['ext'], dir=d['dir'])
-
 class Order:
     def __init__(self, digits, stack=[]):
         self.digits = digits
