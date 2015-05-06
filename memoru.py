@@ -10,12 +10,13 @@ orderfile_name  = '.memoru_order'
 numerical_chars = '0123456789abcdefghijklmnopqrstuvwxyz'
 
 class Memo:
-    def __init__(self, ix, ext):
+    def __init__(self, ix, ext, dir="."):
         self.index     = ix
         self.extension = ext
+        self.directory = dir
 
     def fileName(self):
-        return self.index + "." + self.extension
+        return self.directory + "/" + self.index + "." + self.extension
 
     def make(self, content=''):
         f = open(self.fileName(), 'w')
@@ -23,12 +24,12 @@ class Memo:
         f.close()
 
     def toJSON(self):
-        return json.dumps({'index': self.index, 'ext': self.extension})
+        return json.dumps({'index': self.index, 'ext': self.extension, 'dir': self.directory})
 
     @staticmethod
     def fromJSON(s):
         d = json.loads(s)
-        return Memo(ix=d['index'], ext=d['ext'])
+        return Memo(ix=d['index'], ext=d['ext'], dir=d['dir'])
 
 class Order:
     def __init__(self, digits, stack=[]):
@@ -42,7 +43,7 @@ class Order:
         return map(lambda memo: rebase_num(memo.index, numerical_chars), self.stack)
 
     def toJSON(self):
-        return json.dumps({'digits': self.digits, 'stack': map(lambda memo: {'index': memo.index, 'ext': memo.extension}, self.stack)})
+        return json.dumps({'digits': self.digits, 'stack': map(lambda memo: {'index': memo.index, 'ext': memo.extension, 'dir': memo.directory}, self.stack)})
 
     def write(self):
         f = open(orderfile_name, 'w')
@@ -52,7 +53,7 @@ class Order:
     @staticmethod
     def fromJSON(s):
        d = json.loads(s)
-       return Order(digits=d['digits'], stack=map(lambda e: Memo(e['index'],e['ext']), d['stack']))
+       return Order(digits=d['digits'], stack=map(lambda e: Memo(e['index'],e['ext'],e['dir']), d['stack']))
 
     @staticmethod
     def read():
@@ -110,8 +111,9 @@ def trans(args):
     for f in args.file:
         order   = Order.read()
         splited = (os.path.splitext(f.name)[1])
+        dirname = os.path.dirname(f.name)
         ext     = splited[1:len(splited)]
-        memo    = Memo(mkIx(digits=order.digits, preIxes=order.getPreIxes(), numChars=numerical_chars), ext)
+        memo    = Memo(mkIx(digits=order.digits, preIxes=order.getPreIxes(), numChars=numerical_chars), ext, dirname)
         content = f.read()
 
         memo.make(content)
