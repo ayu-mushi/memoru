@@ -9,6 +9,7 @@ How to install
 ```sh
 git clone https://github.com/ayu-mushi/memoru
 mv memoru/memoru.py $YOUR_PATH/memoru
+chmod +x $YOUR_PATH/memoru
 ```
 
 tutorial
