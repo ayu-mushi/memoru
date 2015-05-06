@@ -114,7 +114,7 @@ if __name__ == '__main__':
     initCmd.add_argument('--digits', type=int, default=5, help='digits of max memo number') #桁
     initCmd.set_defaults(func=memoruInit)
 
-    genCmd = subparsers.add_parser('gen', help='generate a memo file and return filename')
+    genCmd = subparsers.add_parser('gen', help='generate a memo file and return the filename')
     genCmd.add_argument('ext', type=str, help='memo file name extension')
     genCmd.set_defaults(func=memoGen)
 
