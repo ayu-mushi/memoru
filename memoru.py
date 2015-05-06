@@ -17,9 +17,9 @@ class Memo:
     def fileName(self):
         return self.index + "." + self.extension
 
-    def make(self):
+    def make(self, content=''):
         f = open(self.fileName(), 'w')
-        f.write('')
+        f.write(content)
         f.close()
 
     def toJSON(self):
@@ -106,17 +106,34 @@ def memoGen(args):
     order.write()
     print memo.fileName()
 
+def trans(args):
+    order   = Order.read()
+    splited = (os.path.splitext(args.file.name)[1])
+    ext     = splited[1:len(splited)]
+    memo    = Memo(mkIx(digits=order.digits, preIxes=order.getPreIxes(), numChars=numerical_chars), ext)
+    content = args.file.read()
+
+    memo.make(content)
+    order.add(memo)
+    order.write()
+    os.remove(args.file.name)
+    print memo.fileName()
+
 if __name__ == '__main__':
     parser     = argparse.ArgumentParser(description='Generate memo files and operate for memos.')
     subparsers = parser.add_subparsers()
 
     initCmd = subparsers.add_parser('init', help='initialize a directory for memoru')
-    initCmd.add_argument('--digits', type=int, default=5, help='digits of max memo number') #桁
+    initCmd.add_argument('--digits', '-d', type=int, default=5, help='digits of max memo number') #桁
     initCmd.set_defaults(func=memoruInit)
 
     genCmd = subparsers.add_parser('gen', help='generate a memo file and return the filename')
     genCmd.add_argument('ext', type=str, help='memo file name extension')
     genCmd.set_defaults(func=memoGen)
+
+    transCmd = subparsers.add_parser('trans', help='transform a file to a memo')
+    transCmd.add_argument('file', type=argparse.FileType('r'), help='file object which will transform to a memo')
+    transCmd.set_defaults(func=trans)
 
     args = parser.parse_args()
     args.func(args)
