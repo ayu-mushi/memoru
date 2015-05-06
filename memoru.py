@@ -129,7 +129,7 @@ if __name__ == '__main__':
     genCmd.add_argument('ext', type=str, help='memo file name extension')
     genCmd.set_defaults(func=memoGen)
 
-    transCmd = subparsers.add_parser('trans', help='transform a file to a memo')
+    transCmd = subparsers.add_parser('trans', help='transform files to memos')
     transCmd.add_argument('file', nargs='+', type=argparse.FileType('r'), help='file object which will transform to a memo')
     transCmd.set_defaults(func=trans)
 
