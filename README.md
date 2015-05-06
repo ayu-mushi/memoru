@@ -18,3 +18,9 @@ tutorial
 memoru init
 memoru gen
 ```
+
+License
+--------
+This software is licensed under the MIT license.
+
+See LICENSE file.
