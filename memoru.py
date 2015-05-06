@@ -103,7 +103,10 @@ def trans(args):
     for f in args.file:
         order   = Order.read()
         splited = (os.path.splitext(f.name)[1])
-        dirname = os.path.dirname(f.name)
+        if os.path.dirname(f.name) == "":
+            dirname = '.'
+        else:
+            dirname = os.path.dirname(f.name)
         ext     = splited[1:len(splited)]
         memo    = Memo(mkIx(digits=order.digits, preIxes=order.getPreIxes(), numChars=numerical_chars), ext, dirname)
         content = f.read()
