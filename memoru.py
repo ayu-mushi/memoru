@@ -5,6 +5,8 @@ import argparse
 import os
 import json
 import random
+import sys
+import codecs
 
 orderfile_name  = '.memoru_order'
 numerical_chars = '0123456789abcdefghijklmnopqrstuvwxyz'
@@ -121,6 +123,16 @@ def getMemo(args):
     order = Order.read()
     print order.stack[args.number].fileName()
 
+def memoList(args):
+    order = Order.read()
+    i = 0
+    for memo in order.stack:
+        f = codecs.open(memo.fileName(), 'r', 'utf-8')
+        content = f.read()
+        f.close()
+        print str(i) + ' ' + memo.fileName() + ': ' + content[0:args.length]
+        i += 1
+
 if __name__ == '__main__':
     parser     = argparse.ArgumentParser(description='Generate memo files and operate for memos.')
     subparsers = parser.add_subparsers()
@@ -140,6 +152,12 @@ if __name__ == '__main__':
     getCmd = subparsers.add_parser('get', help='return a memo')
     getCmd.add_argument('-n', '--number', type=int, default=0, help='')
     getCmd.set_defaults(func=getMemo)
+
+    lsCmd  = subparsers.add_parser('ls', help='return a memo')
+    lsCmd.add_argument('-l', '--length', type=int, default=20, help='')
+    lsCmd.set_defaults(func=memoList)
+
+    sys.stdout = codecs.getwriter('utf_8')(sys.stdout)
 
     args = parser.parse_args()
     args.func(args)
