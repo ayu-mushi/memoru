@@ -141,6 +141,18 @@ def rmMemo(args):
     order.stack = stack
     order.write()
 
+def popMemo(args):
+    order   = Order.read()
+    stack   = order.stack
+    f       = codecs.open(stack[args.number].fileName(), 'r', 'utf-8')
+    content = f.read()
+    f.close()
+    os.remove(stack[args.number].fileName())
+    stack.pop(args.number)
+    order.stack = stack
+    order.write()
+    print content
+
 if __name__ == '__main__':
     parser     = argparse.ArgumentParser(description='Generate memo files and operate for memos.')
     subparsers = parser.add_subparsers()
@@ -168,6 +180,10 @@ if __name__ == '__main__':
     rmCmd  = subparsers.add_parser('rm', help='remove a memo')
     rmCmd.add_argument('number', type=int, default=0, help='')
     rmCmd.set_defaults(func=rmMemo)
+
+    popCmd = subparsers.add_parser('pop', help='pop a memo')
+    popCmd.add_argument('--number', type=int, default=0, help='')
+    popCmd.set_defaults(func=popMemo)
 
     sys.stdout = codecs.getwriter('utf_8')(sys.stdout)
 
