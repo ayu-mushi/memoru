@@ -130,7 +130,7 @@ def memoList(args):
         f = codecs.open(memo.fileName(), 'r', 'utf-8')
         content = f.read()
         f.close()
-        print str(i) + ' ' + memo.fileName() + ': ' + content[0:args.length]
+        print str(i) + ' ' + memo.fileName() + ': ' + (content if args.abst is None else content[0:args.abst])
         i += 1
 
 def rmMemo(args):
@@ -162,7 +162,7 @@ if __name__ == '__main__':
     getCmd.set_defaults(func=getMemo)
 
     lsCmd  = subparsers.add_parser('ls', help='return a memo')
-    lsCmd.add_argument('-l', '--length', type=int, default=20, help='')
+    lsCmd.add_argument('-a', '--abst', nargs='?', type=int, const=20, default=None, help='')
     lsCmd.set_defaults(func=memoList)
 
     rmCmd  = subparsers.add_parser('rm', help='remove a memo')
