@@ -133,6 +133,14 @@ def memoList(args):
         print str(i) + ' ' + memo.fileName() + ': ' + content[0:args.length]
         i += 1
 
+def rmMemo(args):
+    order = Order.read()
+    stack = order.stack
+    os.remove(stack[args.number].fileName())
+    del stack[args.number]
+    order.stack = stack
+    order.write()
+
 if __name__ == '__main__':
     parser     = argparse.ArgumentParser(description='Generate memo files and operate for memos.')
     subparsers = parser.add_subparsers()
@@ -156,6 +164,10 @@ if __name__ == '__main__':
     lsCmd  = subparsers.add_parser('ls', help='return a memo')
     lsCmd.add_argument('-l', '--length', type=int, default=20, help='')
     lsCmd.set_defaults(func=memoList)
+
+    rmCmd  = subparsers.add_parser('rm', help='remove a memo')
+    rmCmd.add_argument('number', type=int, default=0, help='')
+    rmCmd.set_defaults(func=rmMemo)
 
     sys.stdout = codecs.getwriter('utf_8')(sys.stdout)
 
