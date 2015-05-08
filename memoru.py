@@ -117,6 +117,10 @@ def trans(args):
         os.remove(f.name)
         print memo.fileName()
 
+def getMemo(args):
+    order = Order.read()
+    print order.stack[args.number].fileName()
+
 if __name__ == '__main__':
     parser     = argparse.ArgumentParser(description='Generate memo files and operate for memos.')
     subparsers = parser.add_subparsers()
@@ -132,6 +136,10 @@ if __name__ == '__main__':
     transCmd = subparsers.add_parser('trans', help='transform files to memos')
     transCmd.add_argument('file', nargs='+', type=argparse.FileType('r'), help='file object which will transform to a memo')
     transCmd.set_defaults(func=trans)
+
+    getCmd = subparsers.add_parser('get', help='return a memo')
+    getCmd.add_argument('-n', '--number', type=int, default=0, help='')
+    getCmd.set_defaults(func=getMemo)
 
     args = parser.parse_args()
     args.func(args)
