@@ -31,7 +31,7 @@ class Order:
         self.stack  = stack
 
     def add(self, memo):
-        self.stack.append(memo)
+        self.stack.insert(0,memo)
 
     def getPreIxes(self):
         return map(lambda memo: rebase_num(memo.index, numerical_chars), self.stack)
