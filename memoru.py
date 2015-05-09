@@ -177,23 +177,23 @@ if __name__ == '__main__':
     transCmd.set_defaults(func=trans)
 
     getCmd = subparsers.add_parser('get', help='return a memo')
-    getCmd.add_argument('-n', '--number', type=int, default=0, help='')
+    getCmd.add_argument('-n', '--number', type=int, default=0, help='memo number')
     getCmd.set_defaults(func=getMemo)
 
     lsCmd  = subparsers.add_parser('ls', help='put a memo list')
-    lsCmd.add_argument('-a', '--abst', nargs='?', type=int, const=20, default=None, help='')
+    lsCmd.add_argument('-a', '--abst', nargs='?', type=int, const=20, default=None, help='abstraction power (length)')
     lsCmd.set_defaults(func=memoList)
 
     rmCmd  = subparsers.add_parser('rm', help='remove a memo')
-    rmCmd.add_argument('number', type=int, default=0, help='')
+    rmCmd.add_argument('number', type=int, default=0, help='number of memo')
     rmCmd.set_defaults(func=rmMemo)
 
     popCmd = subparsers.add_parser('pop', help='pop a memo')
-    popCmd.add_argument('--number', '-n', type=int, default=0, help='')
+    popCmd.add_argument('--number', '-n', type=int, default=0, help='number of memo')
     popCmd.set_defaults(func=popMemo)
 
     flipCmd = subparsers.add_parser('flip', help='flip between 2 memos in stack')
-    flipCmd.add_argument('--number', '-n', type=int, default=1, help='')
+    flipCmd.add_argument('--number', '-n', type=int, default=1, help='number of memo which will flip')
     flipCmd.set_defaults(func=flip)
 
     sys.stdout = codecs.getwriter('utf_8')(sys.stdout)
