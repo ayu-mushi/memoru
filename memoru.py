@@ -183,7 +183,7 @@ if __name__ == '__main__':
     getCmd.add_argument('-n', '--number', type=int, default=0, help='')
     getCmd.set_defaults(func=getMemo)
 
-    lsCmd  = subparsers.add_parser('ls', help='return a memo')
+    lsCmd  = subparsers.add_parser('ls', help='put a memo list')
     lsCmd.add_argument('-a', '--abst', nargs='?', type=int, const=20, default=None, help='')
     lsCmd.set_defaults(func=memoList)
 
