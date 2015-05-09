@@ -156,7 +156,7 @@ def popMemo(args):
 def flip(args):
     order       = Order.read()
     stack       = order.stack
-    stack.insert(0, stack[args.number])
+    stack.insert(args.cutting, stack[args.number])
     order.stack = stack
     order.write()
 
@@ -194,6 +194,7 @@ if __name__ == '__main__':
 
     flipCmd = subparsers.add_parser('flip', help='flip between 2 memos in stack')
     flipCmd.add_argument('--number', '-n', type=int, default=1, help='number of memo which will flip')
+    flipCmd.add_argument('--cutting', '-c', type=int, default=0, help='cutting point in stack')
     flipCmd.set_defaults(func=flip)
 
     sys.stdout = codecs.getwriter('utf_8')(sys.stdout)
