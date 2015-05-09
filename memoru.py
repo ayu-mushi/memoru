@@ -153,6 +153,16 @@ def popMemo(args):
     order.write()
     print content
 
+def flip(args):
+    order    = Order.read()
+    stack    = order.stack
+    m        = stack[args.number]
+    n        = stack[0]
+    stack[args.number] = n
+    stack[0] = m
+    order.stack = stack
+    order.write()
+
 if __name__ == '__main__':
     parser     = argparse.ArgumentParser(description='Generate memo files and operate for memos.')
     subparsers = parser.add_subparsers()
@@ -182,8 +192,12 @@ if __name__ == '__main__':
     rmCmd.set_defaults(func=rmMemo)
 
     popCmd = subparsers.add_parser('pop', help='pop a memo')
-    popCmd.add_argument('--number', type=int, default=0, help='')
+    popCmd.add_argument('--number', '-n', type=int, default=0, help='')
     popCmd.set_defaults(func=popMemo)
+
+    flipCmd = subparsers.add_parser('flip', help='flip between 2 memos in stack')
+    flipCmd.add_argument('--number', '-n', type=int, default=1, help='')
+    flipCmd.set_defaults(func=flip)
 
     sys.stdout = codecs.getwriter('utf_8')(sys.stdout)
 
