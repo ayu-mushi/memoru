@@ -192,9 +192,9 @@ if __name__ == '__main__':
     popCmd.add_argument('--number', '-n', type=int, default=0, help='number of memo')
     popCmd.set_defaults(func=popMemo)
 
-    flipCmd = subparsers.add_parser('flip', help='flip between 2 memos in stack')
+    flipCmd = subparsers.add_parser('flip', help='flip between 2 memos in the stack')
     flipCmd.add_argument('--number', '-n', type=int, default=1, help='number of memo which will flip')
-    flipCmd.add_argument('--cutting', '-c', type=int, default=0, help='cutting point in stack')
+    flipCmd.add_argument('--cutting', '-c', type=int, default=0, help='cutting point in the stack')
     flipCmd.set_defaults(func=flip)
 
     sys.stdout = codecs.getwriter('utf_8')(sys.stdout)
