@@ -154,12 +154,9 @@ def popMemo(args):
     print content
 
 def flip(args):
-    order    = Order.read()
-    stack    = order.stack
-    m        = stack[args.number]
-    n        = stack[0]
-    stack[args.number] = n
-    stack[0] = m
+    order       = Order.read()
+    stack       = order.stack
+    stack.insert(0, stack[args.number])
     order.stack = stack
     order.write()
 
