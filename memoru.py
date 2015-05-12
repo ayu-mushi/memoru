@@ -130,7 +130,7 @@ def memoList(args):
         f = codecs.open(memo.fileName(), 'r', 'utf-8')
         content = f.read()
         f.close()
-        print str(i) + ' ' + memo.fileName() + ': ' + (content if args.abst is None else content[0:args.abst])
+        print '['+str(i)+']' + ' ' + memo.fileName() + ': ' + (content if args.abst is None else content[0:args.abst])
         i += 1
 
 def rmMemo(args):
