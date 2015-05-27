@@ -8,7 +8,8 @@ How to install
 -------
 ```sh
 git clone https://github.com/ayu-mushi/memoru
-sudo ./build.sh
+cd memoru
+python setup.py install
 ```
 
 tutorial
