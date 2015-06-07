@@ -12,11 +12,18 @@ cd memoru
 python setup.py install
 ```
 
-tutorial
+Tutorial
 --------
-```sh
-memoru init
-memoru gen
+
+###Initialize
+type `memoru init` to initialize a directory for using memoru.
+
+###memoru & tw
+https://github.com/shokai/tw
+
+```
+vim `memoru gen 'txt'`
+memoru pop | tw --pipe
 ```
 
 License
