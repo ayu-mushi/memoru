@@ -15,7 +15,7 @@ setup(
         author='ayu-mushi',
         author_email='ayu.mushi2015@gmail.com',
         url='https://github.com/ayu-mushi/memoru',
-        scripts=find_scripts('lib/bin'),
+        scripts=find_scripts('bin'),
         packages=find_packages('lib'),
         package_dir={'':'lib'},
         license='MIT')
