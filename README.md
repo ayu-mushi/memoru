@@ -1,6 +1,7 @@
-memoru
+Memoru
 =======
 
+* CLI memo command
 * Memoru generate memos, and support to operate for memos.
 * Each memo has unique and random index.
 
