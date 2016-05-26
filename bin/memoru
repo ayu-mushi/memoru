@@ -148,6 +148,7 @@ def popMemo(args):
     content = f.read()
     f.close()
     sys.stderr.write(content)
+    sys.stderr.write("length: " + str(len(content))+"\n")
     sys.stderr.write("pop? Y/N")
     if raw_input() == "Y" :
         print content
