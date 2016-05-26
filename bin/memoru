@@ -147,11 +147,14 @@ def popMemo(args):
     f       = codecs.open(stack[args.number].fileName(), 'r', 'utf-8')
     content = f.read()
     f.close()
-    os.remove(stack[args.number].fileName())
-    stack.pop(args.number)
-    order.stack = stack
-    order.write()
-    print content
+    sys.stderr.write(content)
+    sys.stderr.write("pop? Y/N")
+    if raw_input() == "Y" :
+        print content
+        os.remove(stack[args.number].fileName())
+        stack.pop(args.number)
+        order.stack = stack
+        order.write()
 
 def flip(args):
     order       = Order.read()
@@ -187,8 +190,8 @@ if __name__ == '__main__':
     lsCmd.set_defaults(func=memoList)
 
     rmCmd  = subparsers.add_parser('rm', help='remove a memo')
-    rmCmd.add_argument('number', type=int, default=0, help='number of memo')
-    rmCmd.set_defaults(func=rmMemo)
+    rmCmd.add_argument('--number', '-n', type=int, default=0, help='number of memo')
+    rmCmd.set_defaults(func=popMemo)
 
     popCmd = subparsers.add_parser('pop', help='pop a memo')
     popCmd.add_argument('--number', '-n', type=int, default=0, help='number of memo')
