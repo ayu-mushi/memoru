@@ -4,6 +4,7 @@ Memoru
 * CLI memo command
 * Memoru generate memos, and support to operate for memos.
 * Each memo has unique and random index.
+* Suitable for twitter draft
 
 How to install
 -------
@@ -26,6 +27,10 @@ https://github.com/shokai/tw
 vim `memoru gen 'txt'`
 memoru pop | tw --pipe
 ```
+
+Related tools
+-----
+
 
 License
 --------
