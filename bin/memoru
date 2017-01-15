@@ -125,13 +125,17 @@ def getMemo(args):
 
 def memoList(args):
     order = Order.read()
-    i = 0
-    for memo in order.stack:
+    i = 0 if not args.reverse else -1
+    st = reversed(order.stack) if args.reverse else order.stack
+    for memo in st:
         f = codecs.open(memo.fileName(), 'r', 'utf-8')
         content = f.read()
         f.close()
         print '['+str(i)+']' + ' ' + memo.fileName() + ': ' + (content if args.abst is None else content[0:args.abst])
-        i += 1
+        if args.reverse:
+            i -= 1
+        else:
+            i += 1
 
 def rmMemo(args):
     order = Order.read()
@@ -188,6 +192,7 @@ if __name__ == '__main__':
 
     lsCmd  = subparsers.add_parser('ls', help='put a memo list')
     lsCmd.add_argument('-a', '--abst', nargs='?', type=int, const=20, default=None, help='abstraction power (length)')
+    lsCmd.add_argument('--reverse', action="store_true", help='minus index')
     lsCmd.set_defaults(func=memoList)
 
     rmCmd  = subparsers.add_parser('rm', help='remove a memo')
