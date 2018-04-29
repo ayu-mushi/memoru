@@ -7,6 +7,8 @@ import json
 import random
 import sys
 import codecs
+import time
+from datetime import datetime
 
 orderfile_name  = '.memoru_order'
 numerical_chars = '0123456789abcdefghijklmnopqrstuvwxyz'
@@ -131,6 +133,7 @@ def memoList(args):
         f = codecs.open(memo.fileName(), 'r', 'utf-8')
         content = f.read()
         f.close()
+        print "[" + str(datetime(*time.localtime(os.path.getctime(memo.fileName()))[:6])) + "]"
         print '['+str(i)+']' + ' ' + memo.fileName() + ': ' + (content if args.abst is None else content[0:args.abst])
         if args.reverse:
             i -= 1
