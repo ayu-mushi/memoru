@@ -2,9 +2,10 @@ Memoru
 =======
 
 * CLI memo command
-* Memoru generate memos, and support to operate for memos.
-* Each memo has unique and random index.
+* Memoru enable to generate memos, and to manipulate memos.
+* Each memo has its own unique and random index.
 * Suitable for twitter draft
+* use the memo stack system
 
 How to install
 -------
@@ -18,7 +19,7 @@ Tutorial
 --------
 
 ###Initialize
-type `memoru init` to initialize a directory for using memoru.
+Type `memoru init` to initialize a directory for using memoru.
 
 ###memoru & tw
 https://github.com/shokai/tw
